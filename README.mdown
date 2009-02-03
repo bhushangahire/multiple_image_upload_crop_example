@@ -4,6 +4,6 @@ This is an example app that shows how I solved the problem of uploading multiple
 images using Paperclip, associating them with a parent model using attribute_fu,
 and allowing the user to manually crop the images after upload.
 
-For more details, read the blog post at http://www.mfischer.com/2009/02/02/multiple-image-upload-and-crop-with-rails
+For more details, read [the blog post](http://www.mfischer.com/2009/02/02/multiple-image-upload-and-crop-with-rails)
 
 
