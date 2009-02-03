@@ -1,0 +1,44 @@
+<p>
+  <b>Name:</b>
+  <%=h @dog.name %>
+</p>
+
+<p>Attached photos:</p>
+<div style="border: 1px solid silver; padding: 1em">
+
+  <% @dog.uploads.each do |u| %>
+    <p>
+      <b>Description:</b>
+      <%=h u.description %>
+    </p>
+
+    <p>
+      <b>upload file name:</b>
+      <%=h u.photo_file_name %>
+    </p>
+
+    <p>
+      <b>upload file size:</b>
+      <%=h u.photo_file_size %>
+    </p>
+
+    <p>
+      <%= image_tag u.photo.url(:pagesize) %>
+    </p>
+
+    <p>
+      <%= image_tag u.photo.url(:thumb) %>
+    </p>
+
+    <p>
+      <%= link_to "Crop this image", edit_upload_path(u) %>
+    </p>
+
+    <hr/>
+
+  <% end %>
+
+</div>
+
+<%= link_to 'Edit', edit_dog_path(@dog) %> |
+<%= link_to 'Back', dogs_path %>

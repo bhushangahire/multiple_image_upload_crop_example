@@ -1,0 +1,63 @@
+<script type="text/javascript" language="JavaScript">
+function onEndCrop( coords, dimensions ) {
+  $( 'upload_x1' ).value = coords.x1;
+  $( 'upload_y1' ).value = coords.y1;
+  $( 'upload_width' ).value = dimensions.width;
+  $( 'upload_height' ).value = dimensions.height;
+}
+
+Event.observe( window, 'load', function() {
+  new Cropper.Img('cropimage', {
+    minWidth: 50,
+    minHeight: 50,
+    displayOnInit: true,
+    onEndCrop: onEndCrop
+  } );
+} );
+</script>
+
+
+<h1>Editing upload</h1>
+
+<% form_for(@upload) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :photo_file_name %><br />
+    <%= f.text_field :photo_file_name, :disabled => true %>
+  </p>
+
+  <!-- CROP FORM -->
+  <div id='cropwrap'>
+    <%= image_tag @upload.photo.url, :id => 'cropimage' %>
+  </div>
+
+  <div id='cropresults'>
+    <%= f.label 'x1' %>
+    <%= f.text_field 'x1', :size => 6 %>
+    <%= f.label 'y1' %>
+    <%= f.text_field 'y1', :size => 6 %>
+    <%= f.label 'width' %>
+    <%= f.text_field 'width', :size => 6 %>
+    <%= f.label 'height' %>
+    <%= f.text_field 'height', :size => 6 %>
+    <br/>
+  </div> <!-- cropresults -->
+  <!-- END CROP FORM -->
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<div id="instructions">
+	<h2>Instructions</h2>		
+	<ul>
+		<li>Hold shift while dragging/resizing to limit select area to a square (<em>not applicable when ratios are applied</em>).</li>
+		<li>Use cursor keys to nudge the select area by one pixel, holding shift will nudge area by 10 pixels.</li>			
+	</ul>
+</div>
